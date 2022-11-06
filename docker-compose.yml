@@ -1,0 +1,43 @@
+version: "3.9"
+
+volumes:
+  pgdata:
+
+services:
+  nginx:
+    container_name: nginx
+    image: nginx:alpine
+    restart: always
+    depends_on:
+      - app
+    expose:
+      - "8080"
+    ports:
+      - "8080:80"
+    volumes:
+      - ./app/conf.d:/etc/nginx/conf.d
+
+  postgresdb:
+    container_name: postgres_cont
+    image: postgres
+    environment:
+      POSTGRES_DB: "stocks"
+      POSTGRES_USER: "admin"
+      POSTGRES_PASSWORD: "adminpass"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./logs:/var/log
+    restart: always
+    healthcheck:
+      test: ["CMD_SHELL", "pg_isready -U admin - d stocks"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  app:
+    container_name: app
+    build: .
+    depends_on:
+      - postgresdb
+    command: ./entrypoint.sh
