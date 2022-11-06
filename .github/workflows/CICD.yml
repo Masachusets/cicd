@@ -45,13 +45,13 @@ jobs:
       - name: Code linting
         run: flake8 logistic
 
-      - name: Testing
-        run: pytest
-        env:
-          SECRET_KEY: ${{ env.SECRET_KEY }}
-          DEBUG: "0"
-          DB_ENGINE: django.db.backends.postgresql
-          DB_NAME: ${{ env.DB }}
-          DB_USER: ${{ env.DB_USER }}
-          DB_PASSWORD: ${{ env.DB_PASS }}
-          DB_HOST: ${{ env.DB_HOST }}
+#      - name: Testing
+#        run: pytest
+#        env:
+#          SECRET_KEY: ${{ env.SECRET_KEY }}
+#          DEBUG: "0"
+#          DB_ENGINE: django.db.backends.postgresql
+#          DB_NAME: ${{ env.DB }}
+#          DB_USER: ${{ env.DB_USER }}
+#          DB_PASSWORD: ${{ env.DB_PASS }}
+#          DB_HOST: ${{ env.DB_HOST }}
