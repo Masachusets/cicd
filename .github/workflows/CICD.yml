@@ -12,7 +12,7 @@ jobs:
     env:
       DB_USER: admin
       DB_PASS: adminpass
-      DB_HOST: postgresdb
+      DB_HOST: localhost
       DB: stocks
       SECRET_KEY: django-insecure-nw^y+m^wmxza1asgk+)!ua2qx9)g+#v=6%76-9i8i(6eqiw94j
       ALLOWED_HOSTS: '*'
