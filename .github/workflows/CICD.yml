@@ -44,7 +44,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Code linting
-        run: flake8 master
+        run: flake8 logistic
 
 #       - name: Тестинг
 #         run: python manage.py test
