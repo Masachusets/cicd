@@ -3,7 +3,7 @@ name: Django Testing and Deploy
 # Указываем при каких условиях срабатывает workflow
 on:
   push:
-    branches: [main]
+    branches: [master]
 
 #
 jobs:
