@@ -1,2 +1,2 @@
-web: gunicorn sample_proj.wsji
+web: gunicorn stocks_products.wsji
 release: python manage.py migrate
