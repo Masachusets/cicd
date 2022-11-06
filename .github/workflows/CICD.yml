@@ -10,20 +10,19 @@ jobs:
   tests:
     runs-on: ubuntu-latest
     env:
-      POSTGRES_USER: admin
-      POSTGRES_PASS: adminpass
-      POSTGRES_HOST: postgresdb
-      POSTGRES_PORT: 5432
-      POSTGRES_DB: stocks
+      DB_USER: admin
+      DB_PASS: adminpass
+      DB_HOST: postgresdb
+      DB: stocks
       SECRET_KEY: django-insecure-nw^y+m^wmxza1asgk+)!ua2qx9)g+#v=6%76-9i8i(6eqiw94j
       ALLOWED_HOSTS: '*'
     services:
       postgres_main:
         image: postgres
         env:
-          POSTGRES_USER: ${{ env.POSTGRES_USER }}
-          POSTGRES_PASSWORD: ${{ env.POSTGRES_PASS }}
-          POSTGRES_DB: ${{ env.POSTGRES_DB }}
+          POSTGRES_USER: ${{ env.DB_USER }}
+          POSTGRES_PASSWORD: ${{ env.DB_PASS }}
+          POSTGRES_DB: ${{ env.DB }}
         ports:
           - 5432:5432
         options:
@@ -46,15 +45,13 @@ jobs:
       - name: Code linting
         run: flake8 logistic
 
-#       - name: Тестинг
-#         run: python manage.py test
-#         env:
-#           SECRET_KEY: ${{ env.SECRET_KEY }}
-#           DEBUG: "0"
-#           ALLOWED_HOSTS: ${{ env.ALLOWED_HOSTS }}
-#           DB_ENGINE: django.db.backends.postgresql
-#           DB_NAME: ${{ env.POSTGRES_DB }}
-#           DB_USER: ${{ env.POSTGRES_USER }}
-#           DB_PASSWORD: ${{ env.POSTGRES_PASS }}
-#           DB_HOST: ${{ env.POSTGRES_HOST }}
-#           DB_PORT: ${{ env.POSTGRES_PORT }}
+      - name: Testing
+        run: pytest
+        env:
+          SECRET_KEY: ${{ env.SECRET_KEY }}
+          DEBUG: "0"
+          DB_ENGINE: django.db.backends.postgresql
+          DB_NAME: ${{ env.DB }}
+          DB_USER: ${{ env.DB_USER }}
+          DB_PASSWORD: ${{ env.DB_PASS }}
+          DB_HOST: ${{ env.DB_HOST }}

@@ -5,6 +5,11 @@ djangorestframework==3.13.1
 psycopg2-binary==2.9.3
 pytz==2022.2.1
 sqlparse==0.4.2
+python-dotenv
+pytest
+pytest-django
+model_bakery
+pytest-cov
 gunicorn
 flake8
 django-heroku
